@@ -1,5 +1,5 @@
-import { fetchPost } from "../common/web.js";
-import { serverUrl } from "../common/def_global.js";
+import { fetchPost } from "./common/web.js";
+import { serverUrl } from "./common/def_global.js";
 
 Init();
 document.getElementById('daily_checked').addEventListener('change', checked_change);
