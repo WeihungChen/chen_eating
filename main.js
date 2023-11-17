@@ -63,7 +63,6 @@ function DefaultChanged()
 {
     var val = this.checked;
     var className = '.' + this.className;
-    console.log(className);
     var allObj = document.querySelectorAll(className);
     for(var i=0; i<allObj.length; i++)
         allObj[i].checked = val;
@@ -131,9 +130,8 @@ async function SubmitData()
     }
     else
         content.data.Type = "Default";
-    console.log(content);
+
     var result = await fetchPost(serverUrl + '/api', content, "application/json");
-    console.log(result);
     if(result[0] == 200)
         document.location.href="./done.html";
 }
