@@ -2,6 +2,7 @@ import { fetchPost } from "./common/web.js";
 import { serverUrl } from "./common/def_global.js";
 
 Init();
+document.getElementById('default_checked').addEventListener('change', checked_change);
 document.getElementById('daily_checked').addEventListener('change', checked_change);
 document.getElementById('period_checked').addEventListener('change', checked_change);
 document.getElementById('name').addEventListener('change', UserChanged);
@@ -10,7 +11,7 @@ document.getElementById('default_night').addEventListener('change', DefaultChang
 document.getElementById('default_tomorrow').addEventListener('change', DefaultChanged);
 document.getElementById('btn_submit').addEventListener('click', SubmitData);
 
-document.getElementById('daily_checked').dispatchEvent(new Event('change'));
+document.getElementById('default_checked').dispatchEvent(new Event('change'));
 
 async function Init()
 {
@@ -128,6 +129,8 @@ async function SubmitData()
             }]
         }
     }
+    else
+        content.data.Type = "Default";
     console.log(content);
     var result = await fetchPost(serverUrl + '/api', content, "application/json");
     console.log(result);
@@ -141,5 +144,7 @@ function checked_change()
     const allTabs = document.querySelectorAll('.ctab');
     for(var i=0; i<allTabs.length; i++)
         allTabs[i].style.display = 'none';
-    document.getElementById(type).style.display = 'block';
+    const obj = document.getElementById(type);
+    if(obj != null)
+        obj.style.display = 'block';
 }

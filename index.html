@@ -23,13 +23,18 @@
         <input type="checkbox" class="cTomorrow" id="default_tomorrow"> 預設隔天帶便當
     </label>
     <label class="bold_label">
-        <input type="radio" id="daily_checked" name="schedule-type" checked>
+        <input type="radio" id="default_checked" name="schedule-type" checked>
+        我只想設定預設值
+    </label>
+
+    <label class="bold_label">
+        <input type="radio" id="daily_checked" name="schedule-type">
         單日
     </label>
     <div class="daily ctab" id="daily">
         <label for="date">
             選擇日期：
-            <input type="date" id="daily_date" name="date" required>
+            <input type="date" id="daily_date" name="date">
             <input type="checkbox" class="cNoon" id="daily_noon"> 中午
             <input type="checkbox" class="cNight" id="daily_night"> 晚上
             <input type="checkbox" class="cTomorrow" id="daily_tomorrow"> 隔天帶便當
@@ -43,12 +48,12 @@
     <div class="period ctab" id="period">
         <label>
             開始日期：
-            <input type="date" id="period_start_date" required>
+            <input type="date" id="period_start_date">
         </label>
 
         <label>
             結束日期：
-            <input type="date" id="period_end_date" required>
+            <input type="date" id="period_end_date">
         </label>
 
         <label>
