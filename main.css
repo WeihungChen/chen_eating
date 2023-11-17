@@ -25,6 +25,10 @@ label {
     color: #333;
 }
 
+.inline_label {
+    display: inline-block;
+}
+
 .bold_label {
     font-size: larger;
     font-weight: bold;
