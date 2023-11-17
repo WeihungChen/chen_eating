@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="Shortcut Icon" type="image/x-icon" href="./favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script type="module" src="main.js"></script>
+    <title>吃飯飯</title>
+</head>
+<body>
+
+<form action="#" method="post">
+    <h2>吃飯飯</h2>
+
+    <label class="bold_label">
+        你是誰：
+        <select id="name"></select>
+    </label>
+    <label class="bold_label">
+        <input type="checkbox" class="cNoon" id="default_noon"> 預設中午
+        <input type="checkbox" class="cNight" id="default_night"> 預設晚上
+        <input type="checkbox" class="cTomorrow" id="default_tomorrow"> 預設隔天帶便當
+    </label>
+    <label class="bold_label">
+        <input type="radio" id="daily_checked" name="schedule-type" checked>
+        單日
+    </label>
+    <div class="daily ctab" id="daily">
+        <label for="date">
+            選擇日期：
+            <input type="date" id="daily_date" name="date" required>
+            <input type="checkbox" class="cNoon" id="daily_noon"> 中午
+            <input type="checkbox" class="cNight" id="daily_night"> 晚上
+            <input type="checkbox" class="cTomorrow" id="daily_tomorrow"> 隔天帶便當
+        </label>
+    </div>
+
+    <label class="bold_label">
+        <input type="radio" id="period_checked" name="schedule-type">
+        一段時間
+    </label>
+    <div class="period ctab" id="period">
+        <label>
+            開始日期：
+            <input type="date" id="period_start_date" required>
+        </label>
+
+        <label>
+            結束日期：
+            <input type="date" id="period_end_date" required>
+        </label>
+
+        <label>
+            星期一：
+        </label>
+        <input type="checkbox" class="cNoon" id="period_mon_noon"> 中午
+        <input type="checkbox" class="cNight" id="period_mon_night"> 晚上
+        <input type="checkbox" class="cTomorrow" id="period_mon_tomorrow"> 隔天帶便當
+
+        <label>
+            星期二：
+        </label>
+        <input type="checkbox" class="cNoon" id="period_tue_noon"> 中午
+        <input type="checkbox" class="cNight" id="period_tue_night"> 晚上
+        <input type="checkbox" class="cTomorrow" id="period_tue_tomorrow"> 隔天帶便當
+
+        <label>
+            星期三：
+        </label>
+        <input type="checkbox" class="cNoon" id="period_wed_noon"> 中午
+        <input type="checkbox" class="cNight" id="period_wed_night"> 晚上
+        <input type="checkbox" class="cTomorrow" id="period_wed_tomorrow"> 隔天帶便當
+
+        <label>
+            星期四：
+        </label>
+        <input type="checkbox" class="cNoon" id="period_thu_noon"> 中午
+        <input type="checkbox" class="cNight" id="period_thu_night"> 晚上
+        <input type="checkbox" class="cTomorrow" id="period_thu_tomorrow"> 隔天帶便當
+
+        <label>
+            星期五：
+        </label>
+        <input type="checkbox" class="cNoon" id="period_fri_noon"> 中午
+        <input type="checkbox" class="cNight" id="period_fri_night"> 晚上
+        <input type="checkbox" class="cTomorrow" id="period_fri_tomorrow"> 隔天帶便當
+    </div>
+
+    <input type="submit" id="btn_submit" value="提交">
+</form>
+
+</body>
+</html>
