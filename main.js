@@ -131,7 +131,8 @@ async function SubmitData()
     console.log(content);
     var result = await fetchPost(serverUrl + '/api', content, "application/json");
     console.log(result);
-    //document.location.href="./done.html";
+    if(result[0] == 200)
+        document.location.href="./done.html";
 }
 
 function checked_change()
