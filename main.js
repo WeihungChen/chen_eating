@@ -15,6 +15,14 @@ document.getElementById('default_checked').dispatchEvent(new Event('change'));
 
 async function Init()
 {
+    var dt = new Date();
+    dt.setHours(8);
+    document.getElementById('daily_date').value = dt.toISOString().substring(0,10);
+    document.getElementById('period_start_date').value = dt.toISOString().substring(0,10);
+    dt.setMonth(dt.getMonth() + 1);
+    dt.setDate(dt.getDate() - 1);
+    document.getElementById('period_end_date').value = dt.toISOString().substring(0,10);
+
     const content = {
         "method": "initeatingform"
     };
