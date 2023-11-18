@@ -6,9 +6,6 @@ document.getElementById('default_checked').addEventListener('change', checked_ch
 document.getElementById('daily_checked').addEventListener('change', checked_change);
 document.getElementById('period_checked').addEventListener('change', checked_change);
 document.getElementById('name').addEventListener('change', UserChanged);
-document.getElementById('default_noon').addEventListener('change', DefaultChanged);
-document.getElementById('default_night').addEventListener('change', DefaultChanged);
-document.getElementById('default_tomorrow').addEventListener('change', DefaultChanged);
 document.getElementById('btn_submit').addEventListener('click', SubmitData);
 
 document.getElementById('default_checked').dispatchEvent(new Event('change'));
@@ -22,6 +19,10 @@ async function Init()
     dt.setMonth(dt.getMonth() + 1);
     dt.setDate(dt.getDate() - 1);
     document.getElementById('period_end_date').value = dt.toISOString().substring(0,10);
+
+    var defaultObjs = document.querySelectorAll('.cDefault');
+    for(var i=0; i<defaultObjs.length; i++)
+        defaultObjs[i].addEventListener('change', DefaultChanged);
 
     const content = {
         "method": "initeatingform"
@@ -56,21 +57,25 @@ async function UserChanged()
     if(result[0] != 200 || result[1] == null)
         return;
 
-    const allNoon = document.querySelectorAll('.cNoon');
-    for(var i=0; i<allNoon.length; i++)
-        allNoon[i].checked = result[1].NoonDefault;
-    const allNight = document.querySelectorAll('.cNight');
-    for(var i=0; i<allNight.length; i++)
-        allNight[i].checked = result[1].NightDefault;
-    const allTomorrow = document.querySelectorAll('.cTomorrow');
-    for(var i=0; i<allTomorrow.length; i++)
-        allTomorrow[i].checked = result[1].TomorrowDefault;
+    console.log(result[1]);
+    for(var i=0; i<result[1].DefaultSetting.length; i++)
+    {
+        const allNoon = document.querySelectorAll('.c_' + (i+1) + '_Noon');
+        for(var j=0; j<allNoon.length; j++)
+            allNoon[j].checked = result[1].DefaultSetting[i].Noon;
+        const allNight = document.querySelectorAll('.c_' + (i+1) + '_Night');
+        for(var j=0; j<allNight.length; j++)
+            allNight[j].checked = result[1].DefaultSetting[i].Night;
+        const allTomorrow = document.querySelectorAll('.c_' + (i+1) + '_Tomorrow');
+        for(var j=0; j<allTomorrow.length; j++)
+            allTomorrow[j].checked = result[1].DefaultSetting[i].Tomorrow;
+    }
 }
 
 function DefaultChanged()
 {
     var val = this.checked;
-    var className = '.' + this.className;
+    var className = '.' + this.className.split(' ')[1];
     var allObj = document.querySelectorAll(className);
     for(var i=0; i<allObj.length; i++)
         allObj[i].checked = val;
@@ -83,18 +88,27 @@ async function SubmitData()
         "method": "submiteatdata",
         "data": {
             "UserID": document.getElementById('name').value,
-            "Default": {
-                "Noon": document.getElementById('default_noon').checked,
-                "Night": document.getElementById('default_night').checked,
-                "Tomorrow": document.getElementById('default_tomorrow').checked
-            },
+            "Default": [],
             "Type": "",
             "Period": {},
             "OneDay": {}
         }
     }
+    for(var i=1; i<=5; i++)
+    {
+        content.data.Default[content.data.Default.length] = {
+            "Noon": document.getElementById('default_' + i + '_noon').checked,
+            "Night": document.getElementById('default_' + i + '_night').checked,
+            "Tomorrow": document.getElementById('default_' + i + '_tomorrow').checked
+        };
+    }
     if(document.getElementById('daily').style.display == 'block')
     {
+        if(document.getElementById('daily_date').value == '')
+        {
+            alert('請填入日期');
+            return;
+        }
         content.data.Type = "OneDay";
         content.data.OneDay = {
             "Date": document.getElementById('daily_date').value,
@@ -105,35 +119,25 @@ async function SubmitData()
     }
     else if(document.getElementById('period').style.display == 'block')
     {
+        if(document.getElementById('period_start_date').value == '' ||
+            document.getElementById('period_end_date').value == '')
+        {
+            alert('請填入日期');
+            return;
+        }
         content.data.Type = "Period";
         content.data.Period = {
             "StartDate": document.getElementById('period_start_date').value,
             "EndDate": document.getElementById('period_end_date').value,
-            "Weekly": [{
-                "Noon": document.getElementById('period_mon_noon').checked,
-                "Night": document.getElementById('period_mon_night').checked,
-                "Tomorrow": document.getElementById('period_mon_tomorrow').checked
-            },
-            {
-                "Noon": document.getElementById('period_tue_noon').checked,
-                "Night": document.getElementById('period_tue_night').checked,
-                "Tomorrow": document.getElementById('period_tue_tomorrow').checked
-            },
-            {
-                "Noon": document.getElementById('period_wed_noon').checked,
-                "Night": document.getElementById('period_wed_night').checked,
-                "Tomorrow": document.getElementById('period_wed_tomorrow').checked
-            },
-            {
-                "Noon": document.getElementById('period_thu_noon').checked,
-                "Night": document.getElementById('period_thu_night').checked,
-                "Tomorrow": document.getElementById('period_thu_tomorrow').checked
-            },
-            {
-                "Noon": document.getElementById('period_fri_noon').checked,
-                "Night": document.getElementById('period_fri_night').checked,
-                "Tomorrow": document.getElementById('period_fri_tomorrow').checked
-            }]
+            "Weekly": []
+        }
+        for(var i=1; i<=5; i++)
+        {
+            content.data.Period.Weekly[content.data.Period.Weekly.length] = {
+                "Noon": document.getElementById('period_' + i + '_noon').checked,
+                "Night": document.getElementById('period_' + i + '_night').checked,
+                "Tomorrow": document.getElementById('period_' + i + '_tomorrow').checked
+            };
         }
     }
     else

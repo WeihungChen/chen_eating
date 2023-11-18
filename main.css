@@ -34,6 +34,10 @@ label {
     font-weight: bold;
 }
 
+.default_label {
+    font-weight: bold;
+}
+
 input[type="date"], input[type="checkbox"] {
     margin-bottom: 10px;
 }
@@ -45,6 +49,7 @@ textarea {
 .ctab {
     display: none;
 }
+
 input[type="submit"] {
     background-color: #4caf50;
     color: #fff;
