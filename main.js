@@ -6,6 +6,7 @@ document.getElementById('default_checked').addEventListener('change', checked_ch
 document.getElementById('daily_checked').addEventListener('change', checked_change);
 document.getElementById('period_checked').addEventListener('change', checked_change);
 document.getElementById('name').addEventListener('change', UserChanged);
+document.getElementById('daily_date').addEventListener('change', DailyDateChanged);
 document.getElementById('btn_submit').addEventListener('click', SubmitData);
 
 document.getElementById('default_checked').dispatchEvent(new Event('change'));
@@ -19,6 +20,10 @@ async function Init()
     dt.setMonth(dt.getMonth() + 1);
     dt.setDate(dt.getDate() - 1);
     document.getElementById('period_end_date').value = dt.toISOString().substring(0,10);
+
+    var fridayTomorrowObjs = document.querySelectorAll('.c_5_Tomorrow');
+    for(var i=0; i<fridayTomorrowObjs.length; i++)
+        fridayTomorrowObjs[i].disabled = true;
 
     var defaultObjs = document.querySelectorAll('.cDefault');
     for(var i=0; i<defaultObjs.length; i++)
@@ -43,6 +48,21 @@ async function Init()
     }
     if(result[1].length > 0)
         obj.dispatchEvent(new Event('change'));
+}
+
+function DailyDateChanged()
+{
+    console.log(this);
+    var dt = new Date(this.value);
+    console.log(dt);
+    console.log(dt.getDay());
+    if(dt.getDay() == 5)
+    {
+        document.getElementById('daily_tomorrow').disabled = true;
+        document.getElementById('daily_tomorrow').checked = false;
+    }
+    else
+        document.getElementById('daily_tomorrow').disabled = false;
 }
 
 async function UserChanged()
