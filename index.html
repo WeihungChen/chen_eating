@@ -157,6 +157,22 @@
             <label for="period_5_tomorrow" class="inline_label">隔天帶便當</label>
         </label>
     </div>
+    <label class="bold_label">
+        <input type="radio" id="query_checked" name="schedule-type">
+        查詢
+    </label>
+    <div class="query ctab" id="query">
+        <label>
+            開始日期：
+            <input type="date" id="query_start_date">
+        </label>
+
+        <label>
+            結束日期：
+            <input type="date" id="query_end_date">
+        </label>
+        <div><table class="centerTable" id="query_table"></table></div>
+    </div>
 
     <input type="submit" id="btn_submit" value="提交">
 </form>
