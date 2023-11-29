@@ -7,7 +7,6 @@ async function fetchPost(url, body, contentType)
 	{
 		"Content-Type": contentType
 	};
-	console.log(url);
 	var res = await fetch(url, {
 		method: 'POST',
 		headers: header,

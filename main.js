@@ -55,10 +55,7 @@ async function Init()
 
 function DailyDateChanged()
 {
-    console.log(this);
     var dt = new Date(this.value);
-    console.log(dt);
-    console.log(dt.getDay());
     if(dt.getDay() == 5)
     {
         document.getElementById('daily_tomorrow').disabled = true;
@@ -80,7 +77,6 @@ async function UserChanged()
     if(result[0] != 200 || result[1] == null)
         return;
 
-    console.log(result[1]);
     for(var i=0; i<result[1].DefaultSetting.length; i++)
     {
         const allNoon = document.querySelectorAll('.c_' + (i+1) + '_Noon');
@@ -185,7 +181,6 @@ async function SubmitData()
     }while(0);
 
     var result = await fetchPost(serverUrl + '/api', content, "application/json");
-    console.log(result[1]);
     if(result[0] == 200)
     {
         if(content.data.Type != "Query")
