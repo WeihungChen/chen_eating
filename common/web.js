@@ -12,6 +12,11 @@ async function fetchPost(url, body, contentType)
 		headers: header,
 		body: JSON.stringify(body)
 	});
+	if(res.status == 429)
+	{
+		alert(res.statusText);
+		return [res.status, {}, res.statusText];
+	}
 	var result = await res.json();
 	if(res.status != 200 && result.error != null)
 	{
