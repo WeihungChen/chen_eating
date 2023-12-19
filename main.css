@@ -31,6 +31,10 @@ label {
     color: #333;
 }
 
+#all_info {
+    display: none;
+}
+
 .inline_label {
     display: inline-block;
 }

@@ -42,6 +42,10 @@ async function Init()
     const obj = document.getElementById('name');
     if(obj == null)
         return;
+    var opt_empty = document.createElement('option');
+    opt_empty.innerHTML = '';
+    opt_empty.value = 0;
+    obj.appendChild(opt_empty);
     for(var i=0; i<result[1].length; i++)
     {
         var opt = document.createElement('option');
@@ -67,6 +71,12 @@ function DailyDateChanged()
 
 async function UserChanged()
 {
+    if(this.value > 0)
+        alert("選擇設定：" + this.options[this.selectedIndex].innerHTML);
+    if(this.value == 0)
+        document.getElementById('all_info').style.display = "none";
+    else
+        document.getElementById('all_info').style.display = "block";
     const content = {
         "method": "geteatsetting",
         "data": {
