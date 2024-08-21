@@ -19,8 +19,7 @@ async function Init()
     document.getElementById('daily_date').value = dt.toISOString().substring(0,10);
     document.getElementById('period_start_date').value = dt.toISOString().substring(0,10);
     document.getElementById('query_start_date').value = dt.toISOString().substring(0,10);
-    dt.setMonth(dt.getMonth() + 1);
-    dt.setDate(dt.getDate() - 1);
+    dt.setDate(dt.getDate() + 6);
     document.getElementById('period_end_date').value = dt.toISOString().substring(0,10);
     document.getElementById('query_end_date').value = dt.toISOString().substring(0,10);
 
