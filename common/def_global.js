@@ -1,4 +1,4 @@
-const serverUrl = 'https://chen-eat.onrender.com';
+const serverUrl = 'https://chen-eat-wh7k.onrender.com';
 
 export {
     serverUrl
